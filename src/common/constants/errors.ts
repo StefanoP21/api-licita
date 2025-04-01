@@ -5,7 +5,7 @@ export const errors = {
     message: 'Internal server error',
   },
   // Opportunity
-  opportunityNotExist: {
+  opportunityNotFound: {
     code: 'OPPORTUNITY_NOT_FOUND',
     status: 404,
     message: 'Oportunidad no encontrada',

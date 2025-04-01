@@ -8,6 +8,7 @@ import compression from '@fastify/compress';
 import { ConfigService } from '@nestjs/config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
+import { HttpExceptionFilter } from './common/helpers/error.handler';
 
 async function bootstrap() {
   const port = new ConfigService().get('PORT') || 4040;
@@ -28,7 +29,7 @@ async function bootstrap() {
 
   app.enableCors({
     origin: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+    methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   });
   app.useGlobalPipes(
     new ValidationPipe({
@@ -37,7 +38,7 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
     }),
   );
-  // app.useGlobalFilters(new HttpExceptionFilter());
+  app.useGlobalFilters(new HttpExceptionFilter());
   app.setGlobalPrefix('api');
   await app.register(compression, { encodings: ['gzip', 'deflate'] });
   await app.listen(port);
