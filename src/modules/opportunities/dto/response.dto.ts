@@ -6,8 +6,8 @@ export interface OpportunityResponseDto {
   title: string;
   type: TypeEnum;
   is_followed: boolean;
-  publish_date: Date;
-  close_date: Date;
+  publish_date: string;
+  close_date: string;
 }
 
 const mappingOpportunityDto = (
@@ -18,8 +18,18 @@ const mappingOpportunityDto = (
   title: opportunity.title,
   type: TypeEnum[opportunity.type],
   is_followed: opportunity.is_followed,
-  publish_date: opportunity.publish_date,
-  close_date: opportunity.close_date,
+  publish_date: formatDateOnly(opportunity.publish_date),
+  close_date: formatDateOnly(opportunity.close_date),
 });
 
 export { mappingOpportunityDto };
+
+function formatDateOnly(date: Date): string {
+  if (!date) return '';
+
+  return new Intl.DateTimeFormat('es', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  }).format(date);
+}

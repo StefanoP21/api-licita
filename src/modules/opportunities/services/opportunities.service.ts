@@ -24,7 +24,7 @@ export class OpportunitiesService {
   async findAll(
     pageSize: number,
     page: number,
-    followed?: boolean,
+    followed?: string,
     type?: string,
     dateInit?: string,
     dateEnd?: string,
@@ -33,8 +33,8 @@ export class OpportunitiesService {
       const where = this.buildWhereConditions(
         followed,
         type,
-        dateInit ? new Date(dateInit) : undefined,
-        dateEnd ? new Date(dateEnd) : undefined,
+        dateInit,
+        dateEnd,
       );
 
       const skip = page && pageSize ? (page - 1) * pageSize : undefined;
@@ -109,17 +109,17 @@ export class OpportunitiesService {
   }
 
   private buildWhereConditions(
-    followed: boolean,
+    followed: string,
     type: string,
-    dateInit: Date,
-    dateEnd: Date,
+    dateInit: string,
+    dateEnd: string,
   ) {
     const whereConditions: FindOptionsWhere<Opportunity> = {
       close_date: MoreThanOrEqual(new Date()),
     };
 
     if (followed) {
-      whereConditions.is_followed = followed;
+      whereConditions.is_followed = true;
     }
 
     if (type) {
@@ -127,8 +127,12 @@ export class OpportunitiesService {
     }
 
     if (dateInit && dateEnd) {
-      dateEnd.setDate(dateEnd.getDate() + 1);
-      whereConditions.publish_date = Between(dateInit, dateEnd);
+      const dateInitParsed = new Date(dateInit);
+      const dateEndParsed = new Date(dateEnd);
+      dateInitParsed.setHours(0, 0, 0, 0);
+      dateEndParsed.setHours(23, 59, 59, 999);
+
+      whereConditions.publish_date = Between(dateInitParsed, dateEndParsed);
     }
 
     return whereConditions;

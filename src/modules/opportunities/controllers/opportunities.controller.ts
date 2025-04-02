@@ -20,7 +20,7 @@ export class OpportunitiesController {
   findAll(
     @Param('pageSize', ParseIntPipe) pageSize: number,
     @Param('page', ParseIntPipe) page: number,
-    @Query('followed', ParseBoolPipe) followed?: boolean,
+    @Query('followed') followed?: string,
     @Query('type') type?: string,
     @Query('dateInit') dateInit?: string,
     @Query('dateEnd') dateEnd?: string,
