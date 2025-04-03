@@ -1,73 +1,72 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Api Licita
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+### Instalación
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
+Clona el repositorio y navega hasta el directorio:
 
 ```bash
-$ pnpm install
+git clone https://github.com/StefanoP21/api-licita.git
+#or
+git clone git@github.com:StefanoP21/api-licita.git
 ```
 
-## Running the app
+### Instala las dependencias:
 
 ```bash
-# development
-$ pnpm run start
-
-# watch mode
-$ pnpm run start:dev
-
-# production mode
-$ pnpm run start:prod
+npm i
+#or
+pnpm i
 ```
 
-## Test
+### Variables de Entorno
+
+Cree un archivo .env en la carpeta raíz de su proyecto y añada sus variables. Consulte .env.example para obtener ayuda.
+
+### Base de Datos
+
+Asegúrese de tener Docker instalado y en ejecución. Luego, ejecute el siguiente comando para iniciar la base de datos:
 
 ```bash
-# unit tests
-$ pnpm run test
-
-# e2e tests
-$ pnpm run test:e2e
-
-# test coverage
-$ pnpm run test:cov
+docker-compose up -d
 ```
 
-## Support
+Para comprobar que la base de datos está en funcionamiento, ejecute:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```bash
+docker ps
+```
 
-## Stay in touch
+Esto debería mostrar un contenedor en ejecución con el nombre `opportunities-db`.
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Si la base de datos no se inicia correctamente, asegúrese de que el puerto 5432 no esté en uso por otro servicio y que las credenciales en su archivo .env coincidan con las de su archivo docker-compose.yml.
 
-## License
+### Ejecución en modo de desarrollo
 
-Nest is [MIT licensed](LICENSE).
+Para iniciar la aplicación en modo de desarrollo, ejecuta:
+
+```bash
+npm run start:dev
+#or
+pnpm run start:dev
+```
+
+## API Endpoints
+
+| HTTP Verbs | Endpoints                               | Action                               | Parameters                                        |
+| ---------- | --------------------------------------- | ------------------------------------ | ------------------------------------------------- |
+| GET        | /api/opportunities/page/:pageSize/:page | Para obtener todos las oportunidades | pageSize, page, followed, type, dateInit, dateEnd |
+| PATCH      | /api/opportunities/:id                  | Para editar una oportunidad          | id                                                |
+
+### Tecnologías
+
+- [Node.js](https://nodejs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [NestJS](https://nestjs.com/)
+- [Fastify](https://www.fastify.io/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [TypeORM](https://typeorm.io/)
+- [Docker](https://www.docker.com/)
+
+### Autor
+
+- [Stefano Palomino](https://github.com/StefanoP21)
