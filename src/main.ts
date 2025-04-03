@@ -20,7 +20,7 @@ async function bootstrap() {
   );
 
   const config = new DocumentBuilder()
-    .setTitle('Opportunities api')
+    .setTitle('Licita api')
     .setDescription('API for opportunities management')
     .setVersion('1.0')
     .build();

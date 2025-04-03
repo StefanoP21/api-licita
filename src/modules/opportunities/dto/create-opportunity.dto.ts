@@ -1,10 +1,12 @@
 import {
   IsBoolean,
   IsDate,
+  IsEnum,
   IsNotEmpty,
   IsString,
   MaxLength,
 } from 'class-validator';
+import { TypeEnum } from '../models/opportunities.model';
 
 export class CreateOpportunityDto {
   @IsNotEmpty()
@@ -15,6 +17,10 @@ export class CreateOpportunityDto {
   @IsNotEmpty()
   @IsString()
   title: string;
+
+  @IsNotEmpty()
+  @IsEnum(TypeEnum)
+  type: TypeEnum;
 
   @IsNotEmpty()
   @IsBoolean()

@@ -57,6 +57,16 @@ pnpm run start:dev
 | GET        | /api/opportunities/page/:pageSize/:page | Para obtener todos las oportunidades | pageSize, page, followed, type, dateInit, dateEnd |
 | PATCH      | /api/opportunities/:id                  | Para editar una oportunidad          | id                                                |
 
+## Swagger
+
+La API tiene una documentación Swagger integrada. Para acceder a ella, abre tu navegador y ve a:
+
+```
+http://localhost:4040/api
+```
+
+Esto te permitirá explorar y probar los endpoints de la API de manera interactiva.
+
 ### Tecnologías
 
 - [Node.js](https://nodejs.org/)
